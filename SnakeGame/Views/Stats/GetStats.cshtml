@@ -1,0 +1,23 @@
+﻿@model Player
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game Statistics</title>
+    <link href="~/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div>
+        <tr>
+            @foreach (var score in Model.Games)
+            {
+                <td>
+                    @score
+                </td>
+            }
+        </tr>
+    </div>
+</body>
+</html>
