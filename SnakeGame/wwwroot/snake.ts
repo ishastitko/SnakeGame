@@ -1,9 +1,10 @@
 ﻿const canvas = document.getElementById("gameCanvas") as HTMLCanvasElement;
+const startButton = document.getElementById("startBtn") as HTMLButtonElement;
 const ctx = canvas.getContext("2d")!;
 
 const gridSize = 20;
 const canvasSize = canvas.width / gridSize;
-
+let gameInterval: any;
 let score = 0;
 
 let snake: { x: number, y: number }[] = [
@@ -64,9 +65,15 @@ function gameLoop() {
     if (snake[0].x < 0 || snake[0].x >= canvasSize || snake[0].y < 0 || snake[0].y >= canvasSize) {
         submitScore(score);
         alert("Your score " + score);
-        snake = [{x: 10, y: 10}];
-        direction = {x: 1, y: 0};
+        resetGame();
     }
+}
+function resetGame() {
+    snake = [{ x: 10, y: 10 }];
+    direction = { x: 1, y: 0 };
+    score = 0;
+    clearInterval(gameInterval);
+    gameInterval = null;
 }
 
 async function submitScore(score: number) {
@@ -80,4 +87,8 @@ async function submitScore(score: number) {
     }
 }
 
-setInterval(gameLoop, 200);
+startButton.addEventListener("click", () => {
+    if (!gameInterval) {
+        gameInterval = setInterval(gameLoop, 200);
+    }
+});

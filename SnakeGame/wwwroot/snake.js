@@ -1,8 +1,10 @@
 "use strict";
 const canvas = document.getElementById("gameCanvas");
+const startButton = document.getElementById("startBtn");
 const ctx = canvas.getContext("2d");
 const gridSize = 20;
 const canvasSize = canvas.width / gridSize;
+let gameInterval;
 let score = 0;
 let snake = [
     { x: 10, y: 10 },
@@ -58,9 +60,15 @@ function gameLoop() {
     if (snake[0].x < 0 || snake[0].x >= canvasSize || snake[0].y < 0 || snake[0].y >= canvasSize) {
         submitScore(score);
         alert("Your score " + score);
-        snake = [{ x: 10, y: 10 }];
-        direction = { x: 1, y: 0 };
+        resetGame();
     }
+}
+function resetGame() {
+    snake = [{ x: 10, y: 10 }];
+    direction = { x: 1, y: 0 };
+    score = 0;
+    clearInterval(gameInterval);
+    gameInterval = null;
 }
 async function submitScore(score) {
     const response = await fetch(`https://localhost:7293/api/Stats/AddScore?score=${score}`, {
@@ -73,4 +81,8 @@ async function submitScore(score) {
         console.error("Failed to submit score");
     }
 }
-setInterval(gameLoop, 200);
+startButton.addEventListener("click", () => {
+    if (!gameInterval) {
+        gameInterval = setInterval(gameLoop, 200);
+    }
+});

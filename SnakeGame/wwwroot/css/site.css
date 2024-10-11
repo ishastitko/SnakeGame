@@ -17,10 +17,39 @@ html {
   min-height: 100%;
 }
 
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+}
+
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   font-family: Arial, sans-serif;
+}
+
+.container-game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.navbar {
+    width: 100%;
+}
+
+.nav-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.navbar-font {
+    font-size: 18px;
+    font-weight: bold;
 }

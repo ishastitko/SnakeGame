@@ -26,9 +26,12 @@ namespace SnakeGame.Controllers
             if (player == null)
                 player = new Player { Name = "Ilya2" };
 
-            player.Games.Add(score);
+            if (score != 0)
+            {
+                player.Games.Add(score);
+                await _context.SaveChangesAsync();
+            }
 
-            await _context.SaveChangesAsync();
             return Ok();
         }
 
@@ -42,7 +45,7 @@ namespace SnakeGame.Controllers
             {
                 return NotFound("No stats found.");
             }
-            return Ok(player.Games);
+            return View(player);
         }
     }
 

@@ -10,14 +10,14 @@
 </head>
 <body>
     <div>
-        <tr>
+        <ul>
             @foreach (var score in Model.Games)
             {
-                <td>
+                <li>
                     @score
-                </td>
+                </li>
             }
-        </tr>
+        </ul>
     </div>
 </body>
 </html>
