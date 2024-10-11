@@ -47,6 +47,23 @@ namespace SnakeGame.Controllers
             }
             return View(player);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteScore(int score)
+        {
+            var player = await _context.Players.FirstOrDefaultAsync();
+            if (player == null)
+            {
+                return NotFound("No stats found.");
+            }
+
+            var scoreToRemove = player.Games.FirstOrDefault(s => s == score);
+
+            player.Games.Remove(scoreToRemove);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("GetStats");
+        }
     }
 
 }

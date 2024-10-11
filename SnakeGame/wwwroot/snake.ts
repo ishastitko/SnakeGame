@@ -1,4 +1,5 @@
-﻿const canvas = document.getElementById("gameCanvas") as HTMLCanvasElement;
+﻿const scoreDisplay = document.getElementById("scoreDisplay") as HTMLDivElement;
+const canvas = document.getElementById("gameCanvas") as HTMLCanvasElement;
 const startButton = document.getElementById("startBtn") as HTMLButtonElement;
 const ctx = canvas.getContext("2d")!;
 
@@ -6,6 +7,10 @@ const gridSize = 20;
 const canvasSize = canvas.width / gridSize;
 let gameInterval: any;
 let score = 0;
+
+ctx.font = "50px Arial";
+ctx.textBaseline = "middle";
+ctx.textAlign = "center";
 
 let snake: { x: number, y: number }[] = [
     { x: 10, y: 10 },
@@ -32,6 +37,7 @@ function moveSnake() {
 
     if (newHead.x === food.x && newHead.y === food.y) {
         score += 1;
+        updateScore(score);
         food = {
             x: Math.floor(Math.random() * canvasSize),
             y: Math.floor(Math.random() * canvasSize)
@@ -64,8 +70,9 @@ function gameLoop() {
 
     if (snake[0].x < 0 || snake[0].x >= canvasSize || snake[0].y < 0 || snake[0].y >= canvasSize) {
         submitScore(score);
-        alert("Your score " + score);
+        ctx.fillText("Game Over", canvas.width / 2, canvas.height / 2);
         resetGame();
+        return;
     }
 }
 function resetGame() {
@@ -87,8 +94,13 @@ async function submitScore(score: number) {
     }
 }
 
+function updateScore(score: number) {
+    scoreDisplay.textContent = `Score: ${score}`;
+}
+
 startButton.addEventListener("click", () => {
     if (!gameInterval) {
         gameInterval = setInterval(gameLoop, 200);
+        updateScore(0);
     }
 });

@@ -1,4 +1,5 @@
 "use strict";
+const scoreDisplay = document.getElementById("scoreDisplay");
 const canvas = document.getElementById("gameCanvas");
 const startButton = document.getElementById("startBtn");
 const ctx = canvas.getContext("2d");
@@ -6,6 +7,9 @@ const gridSize = 20;
 const canvasSize = canvas.width / gridSize;
 let gameInterval;
 let score = 0;
+ctx.font = "50px Arial";
+ctx.textBaseline = "middle";
+ctx.textAlign = "center";
 let snake = [
     { x: 10, y: 10 },
 ];
@@ -25,6 +29,7 @@ function moveSnake() {
     snake.unshift(newHead);
     if (newHead.x === food.x && newHead.y === food.y) {
         score += 1;
+        updateScore(score);
         food = {
             x: Math.floor(Math.random() * canvasSize),
             y: Math.floor(Math.random() * canvasSize)
@@ -59,8 +64,9 @@ function gameLoop() {
     drawSnake();
     if (snake[0].x < 0 || snake[0].x >= canvasSize || snake[0].y < 0 || snake[0].y >= canvasSize) {
         submitScore(score);
-        alert("Your score " + score);
+        ctx.fillText("Game Over", canvas.width / 2, canvas.height / 2);
         resetGame();
+        return;
     }
 }
 function resetGame() {
@@ -81,8 +87,12 @@ async function submitScore(score) {
         console.error("Failed to submit score");
     }
 }
+function updateScore(score) {
+    scoreDisplay.textContent = `Score: ${score}`;
+}
 startButton.addEventListener("click", () => {
     if (!gameInterval) {
         gameInterval = setInterval(gameLoop, 200);
+        updateScore(0);
     }
 });

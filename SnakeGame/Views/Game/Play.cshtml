@@ -4,19 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake Game</title>
-    <link href="~/style.css" rel="stylesheet" type="text/css">
+    <link href="~/css/play.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div>
+        <div id="scoreDisplay">
+            Score: 0
+        </div>
         <div>
             <canvas id="gameCanvas" width="400" height="400" style="border:1px solid black;"></canvas>
         </div>
-        <div>
+        <div class="start-btn">
             <button id="startBtn" class="btn btn-success start-game">Start</button>
         </div>
     </div>
-
-    <script src="~/snake.js"></script>
     <script src="~/snake.js?v=@DateTime.Now.Ticks"></script>
 </body>
 </html>

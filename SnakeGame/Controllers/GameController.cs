@@ -6,7 +6,7 @@ namespace SnakeGame.Controllers;
 
 public class GameController : Controller
 {
-    public IActionResult Index()
+    public IActionResult Play()
     {
         return View();
     }

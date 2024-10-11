@@ -6,15 +6,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake Game Statistics</title>
-    <link href="~/style.css" rel="stylesheet" type="text/css">
+    <link href="~/css/stats.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div>
-        <ul>
+        <ul class="stats-style">
             @foreach (var score in Model.Games)
             {
-                <li>
-                    @score
+                <li class="stat">
+                    <span class="score-number">@score</span>
+                    <form asp-action="DeleteScore" asp-route-score="@score" method="post" style="display: inline;">
+                        <button style="font-size: 20px;" type="submit" class="btn btn-danger">Delete</button>
+                    </form>
                 </li>
             }
         </ul>

@@ -1,0 +1,29 @@
+﻿body {
+    display: block;
+}
+
+ul {
+    list-style-type: none;
+
+}
+
+.stats-style {
+    margin-top: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: flex-start;
+}
+
+.stat {
+    margin: 10px;
+    padding: 10px 20px;
+    border: 3px solid black;
+    border-radius: 10px;
+}
+
+.score-number {
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 15px;
+}

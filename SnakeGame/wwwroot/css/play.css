@@ -1,0 +1,9 @@
+﻿.start-game {
+    font-size: 18px;
+}
+
+.start-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
